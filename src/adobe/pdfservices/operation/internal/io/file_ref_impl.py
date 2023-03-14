@@ -9,6 +9,7 @@
 # governing permissions and limitations under the License.
 
 import io
+import shutil
 import logging
 import os
 from io import BufferedWriter
@@ -45,7 +46,7 @@ class FileRefImpl(FileRef):
             if not os.path.exists(dir):
                 os.mkdir(dir)
             if not os.path.exists(abs_path):
-                os.rename(self._file_path, abs_path)
+                shutil.copy(self._file_path, abs_path)
                 return
             raise SdkException("Output file {file} exists".format(file=destination_file_path))
         else:
